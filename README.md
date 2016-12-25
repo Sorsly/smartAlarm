@@ -2,12 +2,13 @@
 Project to create an IOT-type alarm clock that displays time, weather, and other information as well as communicate with your phone.
 
 Goals:
-	displays time, timezone, date, day
+o	displays time, date, day
+	toggle fullscreen with <F11>
+		true fullscreen for that immersive effect
+	displays timezone
 	displays weather
 		displays appropriate clothes based on threshholds set
 			can be an easy pref file with ability to manage multiple pref files
-	displays next alarm(s)
-	displays reminders
 	
 	ties in alarm function with phone, activity monitor, etc.
 		bluetooth
@@ -21,3 +22,13 @@ reference:
 	text
 		http://effbot.org/tkinterbook/text.htm
 			(also talks about valid index parameters)
+	fullscreen
+		http://stackoverflow.com/questions/7966119/display-fullscreen-mode-on-tkinter#23840010	
+			chosen solu doesn't actually work, try the one afterwards (code is cleaner too)
+		http://stackoverflow.com/questions/6573207/fullscreen-windows-with-tkinter?rq=1
+			only max screens it vs fullscreen
+
+immediate todos:
+	make displayed time prettier (no floats (stuff after the decimal))
+	look into fullscreen options
+	have time resize appropriately wrt screen size
