@@ -15,4 +15,9 @@ Goals:
 	always viewable/input to trigger display
 		input can be phone, capacitive touch button, sound, gesture based, etc.
 
-	
+reference:
+	general info
+		tutorialspoint
+	text
+		http://effbot.org/tkinterbook/text.htm
+			(also talks about valid index parameters)
