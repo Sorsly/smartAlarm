@@ -24,10 +24,12 @@ class TimeApp():
 
 	def clock(self):
 		clockData = datetime.now()	#fetch current time
+		#clockData = datetime.strptime("Sun", "%a")	#fetch current time
 
 	#choose Label or Text way of updating time
 	#Label way of updating time
-		self.label.configure(text = clockData)
+		#self.label.configure(text = clockData)	#raw time information
+		self.label.configure(text = datetime.strftime(clockData, "%H:%M:%S\n%a, %b %d"))
 
 	#Text way of updating time
 		#self.text.delete(("0.0"),END)		#inserts current time at current location in text
