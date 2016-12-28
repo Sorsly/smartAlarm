@@ -7,7 +7,7 @@ class TimeApp():
 
 		#Tk() is top level object containing everything else
 		self.root = Tk()				#create object 
-		self.clockFont = tkFont.Font(family = "Calibri", size = 12)
+		self.clockFont = tkFont.Font(family = "Consolas", size = 12)
 
 	#choose Label or Text way of showing time
 	#Label() is a widget under Tk()
@@ -34,6 +34,7 @@ class TimeApp():
 
 		#clock() is a meth that continuously fetches time and updates label
 		self.clock()					#call clock method
+		self.fontUpdate()
 		
 		self.root.mainloop()			#call 'mainloop' from root object to listen for events
 
@@ -53,19 +54,37 @@ class TimeApp():
 		self.root.after(1000, self.clock)	#have self.root call itself after 1000ms
 
 	def fontUpdate(self):
-		self.labelClock.configure(size = newSize)
-		self.root.after(2000, self.test)	#have self.root call itself after 1000ms
+		width = self.root.winfo_width()
+		height = self.root.winfo_height()
+		newSizeW = int(round(0.333 * height - 26.667, 0))
+		newSizeH = 0;
+		#newSizeH not implemented yet (nonlinear, possibly due to font type)
+		if newSizeW > newSizeH:
+			newSize = newSizeW
+		else:
+			newSize = newSizeH
+		self.clockFont.configure(size = newSize)
+		self.root.after(2000, self.fontUpdate)	#have self.root call itself after 1000ms
 	
 	def OnInc(self):
-		width = self.labelClock['width']
-		height = self.labelClock['height']
 		size = self.clockFont['size']
-		print(width)
-		print(height)
-		print(size)
 		self.clockFont.configure(size = size + 2)
+		self.testMeas(size)
 
 	def OnDec(self):
 		size = self.clockFont['size']
 		self.clockFont.configure(size = size - 2)
+		self.testMeas(size)
+	
+	def testMeas(self, size):	#feel free to remove later; used to figure out window size
+		width = self.labelClock.winfo_width()
+		widthWin = self.labelClock.winfo_width()
+		height = self.labelClock.winfo_height()
+		heightWin = self.root.winfo_height()
+		print("width:", width)
+		print('widthWin:', widthWin)
+		print("height:", height)
+		print('heightWin:', heightWin)
+		print(size)
+
 timeApp = TimeApp()
