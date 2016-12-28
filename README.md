@@ -27,6 +27,8 @@ reference:
 			chosen solu doesn't actually work, try the one afterwards (code is cleaner too)
 		http://stackoverflow.com/questions/6573207/fullscreen-windows-with-tkinter?rq=1
 			only max screens it vs fullscreen
+	scaling
+		http://stackoverflow.com/questions/18252434/scaling-tkinter-widgets/18253141
 
 immediate todos:
 o	make displayed time prettier (no floats (stuff after the decimal))
