@@ -7,7 +7,7 @@ class TimeApp():
 
 		#Tk() is top level object containing everything else
 		self.root = Tk()				#create object 
-		self.clockFont = tkFont.Font(family = "Consolas", size = 12)
+		self.clockFont = tkFont.Font(family = "Andale Mono", size = 12)
 
 	#choose Label or Text way of showing time
 	#Label() is a widget under Tk()
@@ -34,7 +34,7 @@ class TimeApp():
 
 		#clock() is a meth that continuously fetches time and updates label
 		self.clock()					#call clock method
-		self.fontUpdate()
+		#self.fontUpdate()
 		
 		self.root.mainloop()			#call 'mainloop' from root object to listen for events
 
@@ -57,9 +57,9 @@ class TimeApp():
 		width = self.root.winfo_width()
 		height = self.root.winfo_height()
 		newSizeW = int(round(0.333 * height - 26.667, 0))
-		newSizeH = 0;
+		newSizeH = 0
 		#newSizeH not implemented yet (nonlinear, possibly due to font type)
-		if newSizeW > newSizeH:
+		if newSizeW < newSizeH:
 			newSize = newSizeW
 		else:
 			newSize = newSizeH
@@ -78,13 +78,17 @@ class TimeApp():
 	
 	def testMeas(self, size):	#feel free to remove later; used to figure out window size
 		width = self.labelClock.winfo_width()
+		widthR = self.labelClock.winfo_reqwidth()
 		widthWin = self.labelClock.winfo_width()
 		height = self.labelClock.winfo_height()
+		heightR = self.labelClock.winfo_reqheight()
 		heightWin = self.root.winfo_height()
 		print("width:", width)
-		print('widthWin:', widthWin)
+		print("widthR:", widthR)
+		#print('widthWin:', widthWin)
 		print("height:", height)
-		print('heightWin:', heightWin)
+		print("heightR:", heightR)
+		#print('heightWin:', heightWin)
 		print(size)
 
 timeApp = TimeApp()

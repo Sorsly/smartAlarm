@@ -5,6 +5,7 @@ Goals:
 o	displays time, date, day
 	toggle fullscreen with <F11>
 		true fullscreen for that immersive effect
+		interface scales to fit screen size
 	displays timezone
 	displays weather
 		displays appropriate clothes based on threshholds set
@@ -30,6 +31,7 @@ reference:
 	scaling
 		http://stackoverflow.com/questions/18252434/scaling-tkinter-widgets/18253141
 		http://stackoverflow.com/questions/4072150/how-to-change-a-widgets-font-style-without-knowing-the-widgets-font-family-siz#4073037
+		scaling is easiest to implement with monospaced fonts
 
 immediate todos:
 o	make displayed time prettier (no floats (stuff after the decimal))
