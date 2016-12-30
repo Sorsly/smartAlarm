@@ -14,6 +14,8 @@ class TimeApp():
 		self.labelLeft = Label(text = "left")
 		self.labelRight = Label(text = "right")
 		self.labelClock = Label(text = "", font = self.clockFont)	#create object
+		self.root.bind("=", self.OnInc)	#attempted to keybind but having error
+		self.root.bind("-", self.OnDec)
 		self.bInc = Button(text = "+", command = self.OnInc)
 		self.bDec = Button(text = "-", command = self.OnDec)
 
