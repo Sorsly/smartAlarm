@@ -35,7 +35,7 @@ class TimeApp():
 		#clock() is a meth that continuously fetches time and updates label
 		self.clock()					#call clock method
 		#self.fontInit()
-		#self.fontUpdate((2, 2))
+		self.fontUpdate()
 		
 		self.root.mainloop()			#call 'mainloop' from root object to listen for events
 
@@ -52,42 +52,34 @@ class TimeApp():
 	def fontInit(self):
 		width = self.root.winfo_width()
 		height = self.root.winfo_height()
-		newSizeW = int(round(0.333 * height - 26.667, 0))
+		newSizeW = int(0.333 * height - 26.667)
 		self.clockFont.configure(size = newSizeW)
 
 		#self.root.after(200, self.fontUpdate((width, height)))	#have self.root call itself after 1000ms
 
-	def fontUpdate(self, (oldWidth, oldHeight)):
+	def fontUpdate(self):	#add in additional params to chart history (to determine when to stop)
 		width = self.root.winfo_width()
+		widthR = self.root.winfo_reqwidth()
 		height = self.root.winfo_height()
-		#if oldWidth != width or oldHeight != height:
-		if 0:
-			newSizeW = int(round(0.333 * height - 26.667, 0))
-			self.clockFont.configure(size = newSizeW)
-
-		width = self.labelClock.winfo_width()
-		widthR = self.labelClock.winfo_reqwidth()
-		height = self.labelClock.winfo_height()
-		heightR = self.labelClock.winfo_reqheight()
-		'''
-		if width < widthR or height < heightR:
+		heightR = self.root.winfo_reqheight()
+		if width > widthR or height > heightR:
 			self.OnInc()
-		elif width > widthR or height > heightR:
+		elif width < widthR or height < heightR:
+			print "on dec"
 			self.OnDec()
-		'''
 		self.testMeas(self.clockFont['size'])
-		
-		self.root.after(200, self.fontUpdate((width, height)))	#have self.root call itself after 1000ms
+		if 1:	#use this if condition to stop call after history indicates it should stop
+			self.root.after(10, self.fontUpdate)	#have self.root call itself after 1000ms
 	
 	def OnInc(self):
 		size = self.clockFont['size']
-		self.clockFont.configure(size = size + 2)
+		self.clockFont.configure(size = size + 1)
 		self.testMeas(size)
 
 	def OnDec(self):
 		size = self.clockFont['size']
 		if size - 2 > 0:
-			self.clockFont.configure(size = size - 2)
+			self.clockFont.configure(size = size - 1)
 		else:
 			print "smallest possible size!"
 		self.testMeas(size)
