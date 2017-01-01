@@ -36,4 +36,4 @@ reference:
 immediate todos:
 o	make displayed time prettier (no floats (stuff after the decimal))
 	look into fullscreen options
-	have time resize appropriately wrt screen size
+/	have time resize appropriately wrt screen size

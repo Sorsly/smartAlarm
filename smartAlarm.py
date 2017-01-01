@@ -11,9 +11,10 @@ class TimeApp():
 
 	#choose Label or Text way of showing time
 	#Label() is a widget under Tk()
+		self.labelPage = Label(text = "Clock")
+		self.labelClock = Label(text = "", font = self.clockFont)	#create object
 		self.labelLeft = Label(text = "left")
 		self.labelRight = Label(text = "right")
-		self.labelClock = Label(text = "", font = self.clockFont)	#create object
 		self.root.bind("=", self.OnInc)	#attempted to keybind but having error
 		self.root.bind("-", self.OnDec)
 		self.bInc = Button(text = "+", command = self.OnInc)
@@ -23,11 +24,12 @@ class TimeApp():
 		height = self.root.winfo_height()
 
 	#"organize" label wrt window using grid geometry
-		self.labelLeft.grid(row = 0, column = 0)	
-		self.labelClock.grid(row = 1, column = 1)
-		self.labelRight.grid(row = 0, column = 2)
-		self.bInc.grid(row = 2, column = 2)
-		self.bDec.grid(row = 3, column = 2)
+		self.labelPage.grid(row = 0, column = 0)
+		self.labelClock.grid(row = 1, column = 0, columnspan = 4)
+		self.labelLeft.grid(row = 2, column = 0)	
+		self.labelRight.grid(row = 2, column = 3)
+		self.bInc.grid(row = 2, column = 1)
+		self.bDec.grid(row = 2, column = 2)
 
 		self.root.columnconfigure(1, weight = 1)
 		self.root.rowconfigure(1, weight = 1)
