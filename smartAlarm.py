@@ -64,11 +64,10 @@ class TimeApp():
 		widthR = self.root.winfo_reqwidth()
 		height = self.root.winfo_height()
 		heightR = self.root.winfo_reqheight()
-		if width > widthR or height > heightR:
-			self.OnInc()
-		elif width < widthR or height < heightR:
-			print "on dec"
+		if width < widthR or height < heightR:
 			self.OnDec()
+		elif width > widthR or height > heightR:
+			self.OnInc()
 		self.testMeas(self.clockFont['size'])
 		if 1:	#use this if condition to stop call after history indicates it should stop
 			self.root.after(10, self.fontUpdate)	#have self.root call itself after 1000ms
