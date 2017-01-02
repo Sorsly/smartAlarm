@@ -32,6 +32,7 @@ reference:
 		http://stackoverflow.com/questions/18252434/scaling-tkinter-widgets/18253141
 		http://stackoverflow.com/questions/4072150/how-to-change-a-widgets-font-style-without-knowing-the-widgets-font-family-siz#4073037
 		scaling is easiest to implement with monospaced fonts
+Accessing Weather API through python scripts)https://github.com/csparpa/pyowm:
 
 immediate todos:
 o	make displayed time prettier (no floats (stuff after the decimal))
