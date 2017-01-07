@@ -3,9 +3,9 @@ Project to create an IOT-type alarm clock that displays time, weather, and other
 
 Goals:
 o	displays time, date, day
-	toggle fullscreen with <F11>
-		true fullscreen for that immersive effect
-		interface scales to fit screen size
+o	toggle fullscreen with <F11>
+o		true fullscreen for that immersive effect
+o		interface scales to fit screen size
 	displays timezone
 	displays weather
 		displays appropriate clothes based on threshholds set
@@ -36,8 +36,9 @@ Accessing Weather API through python scripts)https://github.com/csparpa/pyowm:
 
 immediate todos:
 o	make displayed time prettier (no floats (stuff after the decimal))
-	look into fullscreen options
+o	look into fullscreen options
 o	have time resize appropriately wrt screen size
 
 bugs:
 	scaling kinda works, has some glitchy parts it gets stuck on (toggle screen size to fix?)
+

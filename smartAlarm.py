@@ -7,6 +7,7 @@ class TimeApp():
 
 		#Tk() is top level object containing everything else
 		self.root = Tk()				#create object 
+		self.root.attributes('-zoomed', True) #maximizes window so visible
 		self.clockFont = tkFont.Font(family = "Andale Mono", size = 12)
 
 	#Label() is a widget under Tk()
@@ -14,13 +15,8 @@ class TimeApp():
 		self.labelClock = Label(text = "", font = self.clockFont)	#create object
 		self.labelLeft = Label(text = "left")
 		self.labelRight = Label(text = "right")
-		self.root.bind("=", self.OnInc)	#attempted to keybind but having error
-		self.root.bind("-", self.OnDec)
 		self.bInc = Button(text = "+", command = self.OnInc)
 		self.bDec = Button(text = "-", command = self.OnDec)
-
-		width = self.root.winfo_width()
-		height = self.root.winfo_height()
 
 	#"organize" label wrt window using grid geometry
 		self.labelPage.grid(row = 0, column = 0)
@@ -33,7 +29,14 @@ class TimeApp():
 		self.root.columnconfigure(1, weight = 1)
 		self.root.rowconfigure(1, weight = 1)
 
-		#clock() is a meth that continuously fetches time and updates label
+		self.state = False
+	#bindings
+		self.root.bind("=", self.OnInc)	#attempted to keybind but having error
+		self.root.bind("-", self.OnDec)
+		self.root.bind("<F11>", self.toggleFullscr)
+		self.root.bind("<Escape>", self.endFullscr)
+
+	#clock() is a meth that continuously fetches time and updates label
 		self.clock()					#call clock method
 		#self.fontInit()
 		self.fontUpdate()
@@ -98,5 +101,15 @@ class TimeApp():
 		print("height:", height)
 		print("heightR:", heightR)
 		print(size)
+
+	def toggleFullscr(self, event=None):
+		self.state = not self.state
+		self.root.attributes("-fullscreen", self.state)
+		return "break"
+
+	def endFullscr(self, event=None):
+		self.state = False
+		self.root.attributes("-fullscreen", False)
+		return "break"
 
 timeApp = TimeApp()
