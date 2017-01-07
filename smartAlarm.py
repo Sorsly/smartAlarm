@@ -9,7 +9,6 @@ class TimeApp():
 		self.root = Tk()				#create object 
 		self.clockFont = tkFont.Font(family = "Andale Mono", size = 12)
 
-	#choose Label or Text way of showing time
 	#Label() is a widget under Tk()
 		self.labelPage = Label(text = "Clock")
 		self.labelClock = Label(text = "", font = self.clockFont)	#create object
@@ -57,20 +56,24 @@ class TimeApp():
 		newSizeW = int(0.333 * height - 26.667)
 		self.clockFont.configure(size = newSizeW)
 
-		#self.root.after(200, self.fontUpdate((width, height)))	#have self.root call itself after 1000ms
+		self.root.after(1000, self.fontUpdate(width, height))	#have self.root call itself after 1000ms
 
-	def fontUpdate(self):	#add in additional params to chart history (to determine when to stop)
+	def fontUpdate(self):
 		width = self.root.winfo_width()
 		widthR = self.root.winfo_reqwidth()
 		height = self.root.winfo_height()
 		heightR = self.root.winfo_reqheight()
-		if width < widthR or height < heightR:
-			self.OnDec()
-		elif width > widthR or height > heightR:
-			self.OnInc()
+
 		self.testMeas(self.clockFont['size'])
-		if 1:	#use this if condition to stop call after history indicates it should stop
-			self.root.after(10, self.fontUpdate)	#have self.root call itself after 1000ms
+		if abs(width - widthR) > 20 and (height - heightR) > 5:
+			print "widthDelta:",abs(width - widthR)
+			print "heightDelta:",abs(height - heightR)
+			if width < widthR or height < heightR:
+				self.OnDec()
+			elif width > widthR or height > heightR:
+				self.OnInc()
+
+		self.root.after(10, self.fontUpdate)	#have self.root call itself after 1000ms
 	
 	def OnInc(self):
 		size = self.clockFont['size']
@@ -86,18 +89,14 @@ class TimeApp():
 		self.testMeas(size)
 	
 	def testMeas(self, size):	#feel free to remove later; used to figure out window size
-		width = self.labelClock.winfo_width()
-		widthR = self.labelClock.winfo_reqwidth()
-		widthWin = self.labelClock.winfo_width()
-		height = self.labelClock.winfo_height()
-		heightR = self.labelClock.winfo_reqheight()
-		heightWin = self.root.winfo_height()
+		width = self.root.winfo_width()
+		widthR = self.root.winfo_reqwidth()
+		height = self.root.winfo_height()
+		heightR = self.root.winfo_reqheight()
 		print("width:", width)
 		print("widthR:", widthR)
-		#print('widthWin:', widthWin)
 		print("height:", height)
 		print("heightR:", heightR)
-		#print('heightWin:', heightWin)
 		print(size)
 
 timeApp = TimeApp()

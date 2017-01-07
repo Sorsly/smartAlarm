@@ -37,4 +37,7 @@ Accessing Weather API through python scripts)https://github.com/csparpa/pyowm:
 immediate todos:
 o	make displayed time prettier (no floats (stuff after the decimal))
 	look into fullscreen options
-/	have time resize appropriately wrt screen size
+o	have time resize appropriately wrt screen size
+
+bugs:
+	scaling kinda works, has some glitchy parts it gets stuck on (toggle screen size to fix?)
