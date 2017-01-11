@@ -13,23 +13,23 @@ class TimeApp():
 	#Label() is a widget under Tk()
 		self.labelPage = Label(text = "Clock")
 		self.labelClock = Label(text = "", font = self.clockFont)	#create object
-		self.labelLeft = Label(text = "left")
-		self.labelRight = Label(text = "right")
+		#self.labelLeft = Label(text = "left")
+		#self.labelRight = Label(text = "right")
 		self.bInc = Button(text = "+", command = self.OnInc)
 		self.bDec = Button(text = "-", command = self.OnDec)
 
 	#"organize" label wrt window using grid geometry
 		self.labelPage.grid(row = 0, column = 0)
 		self.labelClock.grid(row = 1, column = 0, columnspan = 4)
-		self.labelLeft.grid(row = 2, column = 0)	
-		self.labelRight.grid(row = 2, column = 3)
+		#self.labelLeft.grid(row = 2, column = 0)	
+		#self.labelRight.grid(row = 2, column = 3)
 		self.bInc.grid(row = 2, column = 1)
 		self.bDec.grid(row = 2, column = 2)
 
-		self.root.columnconfigure(1, weight = 1)
-		self.root.rowconfigure(1, weight = 1)
+		self.root.columnconfigure(1, weight = 1)	#centers wrt grid system
+		self.root.rowconfigure(1, weight = 1)		#centers wrt grid system
 
-		self.state = False
+		self.state = False	#inits fullscreen state
 	#bindings
 		self.root.bind("=", self.OnInc)	#attempted to keybind but having error
 		self.root.bind("-", self.OnDec)
@@ -38,7 +38,6 @@ class TimeApp():
 
 	#clock() is a meth that continuously fetches time and updates label
 		self.clock()					#call clock method
-		#self.fontInit()
 		self.fontUpdate()
 		
 		self.root.mainloop()			#call 'mainloop' from root object to listen for events
@@ -52,14 +51,6 @@ class TimeApp():
 		self.labelClock.configure(text = datetime.strftime(clockData, "%H:%M:%S\n%a, %b %d"))
 
 		self.root.after(1000, self.clock)	#have self.root call itself after 1000ms
-
-	def fontInit(self):
-		width = self.root.winfo_width()
-		height = self.root.winfo_height()
-		newSizeW = int(0.333 * height - 26.667)
-		self.clockFont.configure(size = newSizeW)
-
-		self.root.after(1000, self.fontUpdate(width, height))	#have self.root call itself after 1000ms
 
 	def fontUpdate(self):
 		width = self.root.winfo_width()

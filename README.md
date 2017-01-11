@@ -6,10 +6,12 @@ o	displays time, date, day
 o	toggle fullscreen with <F11>
 o		true fullscreen for that immersive effect
 o		interface scales to fit screen size
-	displays timezone
+	has a "time till" function
+/	integrate theme functionality
 	displays weather
 		displays appropriate clothes based on threshholds set
 			can be an easy pref file with ability to manage multiple pref files
+	displays timezone
 	
 	ties in alarm function with phone, activity monitor, etc.
 		bluetooth
