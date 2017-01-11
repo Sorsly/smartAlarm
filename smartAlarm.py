@@ -64,6 +64,7 @@ class TimeApp():
 		#self.labelClock.configure(text = clockData)	#raw time information
 		ms = clockData.microsecond
 
+		'''
 		if ms < 125000:
 			msChar = "......."
 		elif ms < 250000:
@@ -80,6 +81,13 @@ class TimeApp():
 			msChar = ".....*."
 		elif ms < 999999:
 			msChar = "......*"
+		'''
+
+		if ms < 500000:
+			msChar = "."
+		elif ms < 999999:
+			msChar = ":"
+
 		self.labelMS.configure(text = msChar)
 		self.labelClock.configure(text = datetime.strftime(clockData, "%H:%M:%S\n%a, %b %d"))
 
