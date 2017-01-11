@@ -34,6 +34,12 @@ reference:
 		http://stackoverflow.com/questions/18252434/scaling-tkinter-widgets/18253141
 		http://stackoverflow.com/questions/4072150/how-to-change-a-widgets-font-style-without-knowing-the-widgets-font-family-siz#4073037
 		scaling is easiest to implement with monospaced fonts
+	color
+		http://stackoverflow.com/questions/13588908/dynamically-change-widget-background-color-in-tkinter
+	disabling screen sleep
+		http://www.raspberry-projects.com/pi/pi-operating-systems/raspbian/gui/disable-screen-sleep
+			user "Daviz" in the comments talks about installing xscreensaver and disabling the screensaver to keep screen from sleeping
+		
 Accessing Weather API through python scripts)https://github.com/csparpa/pyowm:
 
 immediate todos:
