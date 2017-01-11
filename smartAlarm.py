@@ -7,29 +7,34 @@ global fgCol
 bgCol = "black"
 fgCol = "white"
 
+global pageNum
+global pageMax
+pageNum = 0
+pageMax = 2
+
 class TimeApp():
 	def __init__(self):
 
 		#Tk() is top level object containing everything else
 		self.root = Tk()				#create object 
 		self.root.attributes('-zoomed', True) #maximizes window so visible
-		self.clockFont = tkFont.Font(family = "Andale Mono", size = 12)
+		self.clockFontL = tkFont.Font(family = "Andale Mono", size = 12)
+		self.clockFontM = tkFont.Font(family = "Andale Mono", size = 6)
+		self.clockFontS = tkFont.Font(family = "Andale Mono", size = 3)
 
 	#Label() is a widget under Tk()
-		self.labelPage = Label(text = "Clock")
-		self.labelClock = Label(text = "", font = self.clockFont)	#create object
+		self.labelPage = Label(text = "Clock", font = self.clockFontS)
+		self.labelClock = Label(text = "", font = self.clockFontL)	#create object
+		self.labelMS = Label(text = "", font = self.clockFontM)	#millisecond widget
 		#self.labelLeft = Label(text = "left")
 		#self.labelRight = Label(text = "right")
-		#self.bInc = Button(text = "+", command = self.OnInc)
-		#self.bDec = Button(text = "-", command = self.OnDec)
 
 	#"organize" label wrt window using grid geometry
 		self.labelPage.grid(row = 0, column = 0)
 		self.labelClock.grid(row = 1, column = 0, columnspan = 4)
+		self.labelMS.grid(row = 2, column = 3)
 		#self.labelLeft.grid(row = 2, column = 0)	
 		#self.labelRight.grid(row = 2, column = 3)
-		#self.bInc.grid(row = 2, column = 1)
-		#self.bDec.grid(row = 2, column = 2)
 
 		self.root.columnconfigure(1, weight = 1)	#centers wrt grid system
 		self.root.rowconfigure(1, weight = 1)		#centers wrt grid system
@@ -41,6 +46,8 @@ class TimeApp():
 		self.root.bind("-", self.OnDec)
 		self.root.bind("<F11>", self.toggleFullscr)
 		self.root.bind("<Escape>", self.endFullscr)
+		self.root.bind("j", self.nextScr)
+		self.root.bind("k", self.prevScr)
 
 	#clock() is a meth that continuously fetches time and updates label
 		self.clock()					#call clock method
@@ -54,10 +61,29 @@ class TimeApp():
 		#clockData = datetime.strptime("Sun", "%a")	#fetch current time
 
 	#Label way of updating time
-		self.labelClock.configure(text = clockData)	#raw time information
+		#self.labelClock.configure(text = clockData)	#raw time information
+		ms = clockData.microsecond
+
+		if ms < 125000:
+			msChar = "...."
+		elif ms < 250000:
+			msChar = "*..."
+		elif ms < 375000:
+			msChar = ".*.."
+		elif ms < 500000:
+			msChar = "..*."
+		elif ms < 625000:
+			msChar = "...*"
+		elif ms < 750000:
+			msChar = "..*."
+		elif ms < 875000:
+			msChar = ".*.."
+		elif ms < 999999:
+			msChar = "*..."
+		self.labelMS.configure(text = msChar)
 		self.labelClock.configure(text = datetime.strftime(clockData, "%H:%M:%S\n%a, %b %d"))
 
-		self.root.after(1000, self.clock)	#have self.root call itself after 1000ms
+		self.root.after(1, self.clock)	#have self.root call itself after 1000ms
 
 	def fontUpdate(self):
 		width = self.root.winfo_width()
@@ -65,7 +91,11 @@ class TimeApp():
 		height = self.root.winfo_height()
 		heightR = self.root.winfo_reqheight()
 
-		self.testMeas(self.clockFont['size'])
+		sizeL = self.clockFontL['size']
+		self.clockFontM.configure(size = sizeL / 2)
+		self.clockFontS.configure(size = sizeL / 4)
+
+		self.testMeas(self.clockFontL['size'])
 		if abs(width - widthR) > 20 and (height - heightR) > 5:
 			print "widthDelta:",abs(width - widthR)
 			print "heightDelta:",abs(height - heightR)
@@ -76,15 +106,23 @@ class TimeApp():
 
 		self.root.after(10, self.fontUpdate)	#have self.root call itself after 1000ms
 	
+	def colUpdate(self, event=None):
+		global bgCol
+		global fgCol
+		self.root.configure(background = bgCol)
+		self.labelClock.configure(bg = bgCol, fg = fgCol)
+		self.labelMS.configure(bg = bgCol, fg = fgCol)
+		self.labelPage.configure(bg = bgCol, fg = fgCol)
+	
 	def OnInc(self, event=None):
-		size = self.clockFont['size']
-		self.clockFont.configure(size = size + 1)
+		size = self.clockFontL['size']
+		self.clockFontL.configure(size = size + 1)
 		self.testMeas(size)
 
 	def OnDec(self, event=None):
-		size = self.clockFont['size']
+		size = self.clockFontL['size']
 		if size - 2 > 0:
-			self.clockFont.configure(size = size - 1)
+			self.clockFontL.configure(size = size - 1)
 		else:
 			print "smallest possible size!"
 		self.testMeas(size)
@@ -110,11 +148,18 @@ class TimeApp():
 		self.root.attributes("-fullscreen", False)
 		return "break"
 
-	def colUpdate(self, event=None):
-		global bgCol
-		global fgCol
-		self.labelClock.configure(bg = bgCol, fg = fgCol)
-		self.labelPage.configure(bg = bgCol, fg = fgCol)
-		self.root.configure(background = bgCol)
+	def nextScr(self, event=None):
+		global pageNum
+		if pageNum < pageMax:
+			pageNum += 1
+		else:
+			pageNum = 0
+
+	def prevScr(self, event=None):
+		global pageNum
+		if pageNum > pageMax:
+			pageNum -= 1
+		else:
+			pageNum = pageMax
 
 timeApp = TimeApp()

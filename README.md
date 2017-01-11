@@ -6,7 +6,7 @@ o	displays time, date, day
 o	toggle fullscreen with <F11>
 o		true fullscreen for that immersive effect
 o		interface scales to fit screen size
-	has a "time till" function
+	has a countdown function
 /	integrate theme functionality
 	displays weather
 		displays appropriate clothes based on threshholds set
