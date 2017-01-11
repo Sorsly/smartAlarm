@@ -2,6 +2,11 @@ from Tkinter import *
 from datetime import datetime
 import tkFont
 
+global bgCol 
+global fgCol
+bgCol = "black"
+fgCol = "white"
+
 class TimeApp():
 	def __init__(self):
 
@@ -15,22 +20,23 @@ class TimeApp():
 		self.labelClock = Label(text = "", font = self.clockFont)	#create object
 		#self.labelLeft = Label(text = "left")
 		#self.labelRight = Label(text = "right")
-		self.bInc = Button(text = "+", command = self.OnInc)
-		self.bDec = Button(text = "-", command = self.OnDec)
+		#self.bInc = Button(text = "+", command = self.OnInc)
+		#self.bDec = Button(text = "-", command = self.OnDec)
 
 	#"organize" label wrt window using grid geometry
 		self.labelPage.grid(row = 0, column = 0)
 		self.labelClock.grid(row = 1, column = 0, columnspan = 4)
 		#self.labelLeft.grid(row = 2, column = 0)	
 		#self.labelRight.grid(row = 2, column = 3)
-		self.bInc.grid(row = 2, column = 1)
-		self.bDec.grid(row = 2, column = 2)
+		#self.bInc.grid(row = 2, column = 1)
+		#self.bDec.grid(row = 2, column = 2)
 
 		self.root.columnconfigure(1, weight = 1)	#centers wrt grid system
 		self.root.rowconfigure(1, weight = 1)		#centers wrt grid system
 
 		self.state = False	#inits fullscreen state
 	#bindings
+		#bindings can call functions defined with these params (self, event=None)
 		self.root.bind("=", self.OnInc)	#attempted to keybind but having error
 		self.root.bind("-", self.OnDec)
 		self.root.bind("<F11>", self.toggleFullscr)
@@ -39,6 +45,7 @@ class TimeApp():
 	#clock() is a meth that continuously fetches time and updates label
 		self.clock()					#call clock method
 		self.fontUpdate()
+		self.colUpdate()
 		
 		self.root.mainloop()			#call 'mainloop' from root object to listen for events
 
@@ -69,12 +76,12 @@ class TimeApp():
 
 		self.root.after(10, self.fontUpdate)	#have self.root call itself after 1000ms
 	
-	def OnInc(self):
+	def OnInc(self, event=None):
 		size = self.clockFont['size']
 		self.clockFont.configure(size = size + 1)
 		self.testMeas(size)
 
-	def OnDec(self):
+	def OnDec(self, event=None):
 		size = self.clockFont['size']
 		if size - 2 > 0:
 			self.clockFont.configure(size = size - 1)
@@ -102,5 +109,12 @@ class TimeApp():
 		self.state = False
 		self.root.attributes("-fullscreen", False)
 		return "break"
+
+	def colUpdate(self, event=None):
+		global bgCol
+		global fgCol
+		self.labelClock.configure(bg = bgCol, fg = fgCol)
+		self.labelPage.configure(bg = bgCol, fg = fgCol)
+		self.root.configure(background = bgCol)
 
 timeApp = TimeApp()
