@@ -83,7 +83,7 @@ class TimeApp():
 		self.labelMS.configure(text = msChar)
 		self.labelClock.configure(text = datetime.strftime(clockData, "%H:%M:%S\n%a, %b %d"))
 
-		self.root.after(50, self.clock)	#have self.root call itself after 1000ms
+		self.root.after(100, self.clock)	#have self.root call itself after 1000ms
 
 	def fontUpdate(self):
 		width = self.root.winfo_width()
