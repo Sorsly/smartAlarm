@@ -49,4 +49,6 @@ o	have time resize appropriately wrt screen size
 
 bugs:
 	scaling kinda works, has some glitchy parts it gets stuck on (toggle screen size to fix?)
+	possible memory leak issue
+		estimate 4-5 days before raspbian seizes
 
